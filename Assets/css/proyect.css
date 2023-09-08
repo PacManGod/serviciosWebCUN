@@ -1,0 +1,97 @@
+section.Inicio {
+  background: #2d6883;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+section.Inicio h1 {
+  font-size: 5rem;
+  font-family: "Montserrat", sans-serif;
+  color: #9eded8;
+  margin: 0;
+  text-shadow: 2px 2px #1b676d;
+  letter-spacing: 0.1em;
+  animation: fadeInDown 1.5s ease-out;
+}
+
+section.Inicio h1 span {
+  display: block;
+}
+
+section.Inicio p {
+  font-family: "Montserrat", sans-serif;
+  color: #f5f5f7;
+  font-size: 2rem;
+  margin-top: 2rem;
+  animation: fadeInUp 1.5s ease-out;
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ContenidoIntro {
+  padding: 20px 15px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.ImagenDescripcion {
+  width: calc(33.33% - 10px);
+  margin-bottom: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.ImagenDescripcion:hover {
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+}
+
+.ImagenDescripcion img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.Descripcion {
+  padding: 10px;
+  text-align: center;
+}
+
+.Descripcion h2 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.Descripcion p {
+  font-size: 0.9rem;
+  line-height: 1.4;
+}

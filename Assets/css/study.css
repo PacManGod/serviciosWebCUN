@@ -1,0 +1,76 @@
+.inicio {
+  background-color: #f5f5f7;
+}
+.wrapper {
+  height: 100vh;
+  /*This part is important for centering*/
+  display: grid;
+  place-items: center;
+}
+
+.typing-demo {
+  width: 11ch;
+  animation: typing 2s steps(15), blink 0.5s step-end infinite alternate;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid;
+  font-family: monospace;
+  font-size: 2em;
+  -webkit-animation: typing 2s steps(15), blink 0.5s step-end infinite alternate;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.tabla {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; /* Centra horizontalmente */
+  height: 100vh; /* Ajusta la altura del section al 100% del viewport */
+  background-color: #268b92;
+}
+
+.fila {
+  display: flex;
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; /* Centra horizontalmente */
+  width: 80%;
+  background-color: #9eded8;
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.fila:hover {
+  background-color: #212121;
+  color: #9eded8;
+}
+
+.imagen-grande {
+  width: 200px;
+  height: auto;
+  margin-right: 20px;
+}
+
+.contenido {
+  flex: 1;
+}
+
+.tabla h2 {
+  font-size: 20px;
+  margin-top: 0;
+}
+
+.tabla p {
+  margin-bottom: 0;
+}
