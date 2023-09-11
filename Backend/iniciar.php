@@ -28,14 +28,18 @@ function inicioSesion($correo, $contraseña){
     $result = $conn->query($sql);
     
     if ($result->num_rows > 0) {
-        // Si el usuario existe, redirigir al usuario a la página deseada
-        header("Location: /ServiciosWebCUN/pages/hud.html");
-        exit(); // Asegura que el script se detenga después de la redirección
+        // El usuario existe, obtener su nombre
+        $row = $result->fetch_assoc();
+        $nombreUsuario = $row['NOMBRE'];
+        // Redirigir al usuario a la página deseada y pasar el nombre como parámetro
+        header("Location: /ServiciosWebCUN/pages/hud.html?nombre=$nombreUsuario");
+        exit();
     } else {
         echo "Error al iniciar sesión: " . $conn->error;
     }
     
     $conn->close();
 }
+
 
 ?>
