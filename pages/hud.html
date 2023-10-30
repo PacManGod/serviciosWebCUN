@@ -2,70 +2,87 @@
 
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Bienvenido</title>
-    <link rel="stylesheet" href="../Assets/css/index.css" />
-    <link rel="stylesheet" href="../Assets/css/nav.css" />
-    <link rel="stylesheet" href="../Assets/css/study.css" />
-    <style>
-      .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        background-color: #333;
-        color: #fff;
-        font-size: 3rem;
-        font-weight: bold;
-        text-align: center;
+
+<head>
+  <title>Bienvenido</title>
+  <link rel="stylesheet" href="../Assets/css/index.css" />
+  <link rel="stylesheet" href="../Assets/css/nav.css" />
+  <link rel="stylesheet" href="../Assets/css/study.css" />
+  <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #333;
+      color: #fff;
+      font-size: 3rem;
+      font-weight: bold;
+      text-align: center;
+      opacity: 0;
+      animation: fade-in 2s ease-in-out forwards;
+    }
+
+    @keyframes fade-in {
+      from {
         opacity: 0;
-        animation: fade-in 2s ease-in-out forwards;
       }
 
-      @keyframes fade-in {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
+      to {
+        opacity: 1;
       }
-    </style>
-  </head>
-  <body>
-    <header class="header">
-      <div class="logo">
-        <img src="Assets/img/logo.png" alt="logo" href="../index.html" />
-      </div>
-      <a class="btn">
-        <button type="button" class="btnVolver">
-          <span>Volver</span>
-        </button>
-      </a>
-    </header>
-    <div class="container">Bienvenido</div>
+    }
+  </style>
 
-    <script>
-      const container = document.querySelector(".container");
-      const urlParams = new URLSearchParams(window.location.search);
-      const nombreUsuario = urlParams.get("nombre");
+</head>
 
-      if (nombreUsuario) {
-        container.textContent = `Bienvenido, ${nombreUsuario}!`;
-      } else {
-        container.textContent = "Bienvenido";
-      }
-    </script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        var btnVolver = document.querySelector(".btnVolver");
+<body>
+  <header class="header">
+    <div class="logo">
+      <img src="Assets/img/LogoCUN.png" alt="logo" href="../index.html" />
+    </div>
+    <a class="btn">
+      <button type="button" class="btnVolver">
+        <span>Volver</span>
+      </button>
+    </a>
+  </header>
+  <div class="container">Bienvenido</div>
 
-        btnVolver.addEventListener("click", function () {
-          // redirige a la página principal
-          window.location.href = "/ServiciosWebCUN/index.html";
+  <script>
+    const container = document.querySelector(".container");
+    const urlParams = new URLSearchParams(window.location.search);
+    const idPersona = urlParams.get("idPersona");
+
+    if (idPersona) {
+      // Realizar una solicitud al servidor para obtener información del usuario
+      fetch(`../Backend/conex.php?idPersona=${idPersona}`)
+        .then(response => response.json())
+        .then(data => {
+          console.log(data); // Agregar un mensaje de depuración
+          // Acceder a la propiedad "Nombre" del objeto JSON
+          const nombre = data.Nombre;
+          // Agregar el nombre al contenido del elemento con la clase "container"
+          container.innerHTML += `<p>Nombre: ${nombre}</p>`;
+        })
+        .catch(error => {
+          console.error('Error en la consulta:', error);
         });
+    }
+
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var btnVolver = document.querySelector(".btnVolver");
+
+      btnVolver.addEventListener("click", function () {
+        // redirige a la página principal
+        window.location.href = "/ServiciosWebCUN/index.html";
       });
-    </script>
-  </body>
+    });
+  </script>
+</body>
+
 </html>

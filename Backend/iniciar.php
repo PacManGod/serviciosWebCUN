@@ -4,42 +4,52 @@ $username = "root";
 $password = "";
 $dbname = "sweb";
 
-// Create connection
+// Crear la conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
+// Comprobar la conexión
 if ($conn->connect_error) {
-    die("Conexion Fallida: " . $conn->connect_error);
+    die("Conexión Fallida: " . $conn->connect_error);
 }
 
 if (empty($_POST)) {
     die("No se enviaron datos desde el formulario.");
 }
 
-// Formulario de registro
+// Formulario de inicio de sesión
 $correo = $_POST['IEmail'];
 $contraseña = $_POST['IPass'];
 
 inicioSesion($correo, $contraseña);
 
-function inicioSesion($correo, $contraseña){
+function inicioSesion($correo, $contraseña)
+{
     global $conn;
-    $sql = "SELECT * FROM usuarios WHERE USUARIO = '$correo' AND CONTRASEÑA = '$contraseña'";
+    $sql = "SELECT * FROM Usuarios WHERE CorreoElectronico = '$correo'";
     $result = $conn->query($sql);
-    
-    if ($result->num_rows > 0) {
-        // El usuario existe, obtener su nombre
+
+    if ($result->num_rows === 1) {
+        // Usuario encontrado, verifica la contraseña
         $row = $result->fetch_assoc();
-        $nombreUsuario = $row['NOMBRE'];
-        // Redirigir al usuario a la página deseada y pasar el nombre como parámetro
-        header("Location: /ServiciosWebCUN/pages/hud.html?nombre=$nombreUsuario");
-        exit();
+        $contraseñaAlmacenada = $row['Contrasena'];
+
+        if (password_verify($contraseña, $contraseñaAlmacenada)) {
+            // Contraseña válida, inicia la sesión del usuario
+            session_start();
+            $_SESSION['usuario_id'] = $row['ID'];
+            $_SESSION['nombre'] = $row['Nombre'];
+            $_SESSION['apellido'] = $row['Apellido'];
+
+            // Redirige al usuario a la página deseada después del inicio de sesión
+            header("Location: /ServiciosWebCUN/pages/hud.html?idPersona=" . urlencode($_SESSION['usuario_id']));
+            exit();
+        } else {
+            echo "Contraseña incorrecta";
+        }
     } else {
-        echo "Error al iniciar sesión: " . $conn->error;
+        echo "Usuario no encontrado";
     }
-    
+
     $conn->close();
 }
-
-
 ?>
