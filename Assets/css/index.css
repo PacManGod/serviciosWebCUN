@@ -222,12 +222,11 @@
 }
 
 .cardMe {
-  height: 379px;
+  height: 380px;
   width: 300px;
-  border-radius: 10px;
   transition: background 0.8s;
   overflow: hidden;
-  box-shadow: 0 70px 63px -60px #000;
+  border: none !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -241,17 +240,12 @@
 .cardMe .border {
   height: 369px;
   width: 290px;
-  margin: 5px;
+  margin: 15px;
   opacity: 0;
   background: transparent;
-  border-radius: 10px;
-  border: #212121 2px solid !important;
+  border: none !important;
   transition: border 1s;
   position: relative;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
   -webkit-transition: border 1s;
   -moz-transition: border 1s;
   -ms-transition: border 1s;
@@ -259,7 +253,6 @@
 }
 
 .cardMe .border:hover {
-  border: 10px solid #212121;
   opacity: 1;
   z-index: 1;
   transition: border 1.5s;
@@ -270,58 +263,23 @@
 }
 
 .cardMe {
-  background: url("../img/IMG_20221005_081424.jpg") center center no-repeat;
-  background-size: 300px;
+  background: url("https://cun.edu.co/wp-content/uploads/2022/07/botones-23.webp")
+    center center no-repeat;
+  background-size: 150px;
 }
 
 .cardMe:hover {
-  background: url("../img/IMG_20221005_081424.jpg") left center no-repeat;
-  background-size: 600px;
-}
-.cardMe:hover span {
-  opacity: 1;
-}
-
-.cardMe span {
-  color: #212121;
-  margin: 20px;
-  font: 1.2em sans-serif;
-  font-weight: bold;
-  opacity: 0;
-  transition: opacity 1s;
-  -webkit-transition: opacity 1s;
-  -moz-transition: opacity 1s;
-  -ms-transition: opacity 1s;
-  -o-transition: opacity 1s;
-}
-
-.cardMe .icons {
-  position: absolute;
-  height: 130px;
-  top: 180px;
-  width: 50px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.cardMe .icons:hover {
-  z-index: 1;
-  transition: fill 1s;
-  -webkit-transition: fill 1s;
-  -moz-transition: fill 1s;
-  -ms-transition: fill 1s;
-  -o-transition: fill 1s;
+  background: url("https://cun.edu.co/wp-content/uploads/2022/07/botones-23.webp")
+    center center no-repeat;
+  background-size: 300px;
 }
 
 .cardMe2 {
-  height: 379px;
+  height: 380px;
   width: 300px;
-  border-radius: 10px;
   transition: background 0.8s;
   overflow: hidden;
-  box-shadow: 0 70px 63px -60px #000;
+  border: none !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -335,24 +293,19 @@
 .cardMe2 .border {
   height: 369px;
   width: 290px;
-  margin: 5px;
+  margin: 15px;
   opacity: 0;
   background: transparent;
-  border-radius: 10px;
-  border: #212121 2px solid !important;
+  border: none !important;
   transition: border 1s;
   position: relative;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
   -webkit-transition: border 1s;
   -moz-transition: border 1s;
   -ms-transition: border 1s;
   -o-transition: border 1s;
 }
+
 .cardMe2 .border:hover {
-  border: 4px solid #212121 !important;
   opacity: 1;
   z-index: 1;
   transition: border 1.5s;
@@ -363,46 +316,13 @@
 }
 
 .cardMe2 {
-  background: url("../img/Yo.jpg") center center no-repeat;
-  background-size: 300px;
+  background: url("https://cun.edu.co/wp-content/uploads/2022/07/SINU-botones-19.png")
+    center center no-repeat;
+  background-size: 150px;
 }
+
 .cardMe2:hover {
-  background: url("../img/Yo.jpg") left center no-repeat;
-  background-size: 600px;
-}
-.cardMe2:hover span {
-  opacity: 1;
-}
-
-.cardMe2 span {
-  color: #212121;
-  font: 1.2em sans-serif;
-  font-weight: bold;
-  margin: 20px;
-  opacity: 0;
-  transition: opacity 1s;
-  -webkit-transition: opacity 1s;
-  -moz-transition: opacity 1s;
-  -ms-transition: opacity 1s;
-  -o-transition: opacity 1s;
-}
-
-.cardMe2 .icons {
-  position: absolute;
-  height: 130px;
-  top: 180px;
-  width: 50px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.cardMe2 .icons:hover {
-  z-index: 1;
-  transition: fill 1s;
-  -webkit-transition: fill 1s;
-  -moz-transition: fill 1s;
-  -ms-transition: fill 1s;
-  -o-transition: fill 1s;
+  background: url("https://cun.edu.co/wp-content/uploads/2022/07/SINU-botones-19.png")
+    center center no-repeat;
+  background-size: 300px;
 }
