@@ -24,19 +24,29 @@ $contraseña = $_POST['RPass'];
 
 registrar($nombre, $apellido, $correo, $contraseña);
 
-//funcion registrar usuario
-function registrar($nombre, $apellido, $correo, $contraseña){
+// Función para registrar un usuario
+function registrar($nombre, $apellido, $correo, $contraseña)
+{
     global $conn;
-    $sql = "INSERT INTO usuarios (NOMBRE, APELLIDO, USUARIO, CONTRASEÑA) VALUES ('$nombre', '$apellido', '$correo', '$contraseña')";
-    
+    $fechaRegistro = date('Y-m-d H:i:s'); // Obtén la fecha y hora actual
+    $rol = 'Usuario'; // Asigna un rol por defecto
+    $activo = 1; // Indica que el usuario está activo
+    $ultimoInicioSesion = $fechaRegistro; // Establece el último inicio de sesión como la fecha de registro
+
+    // Hasheo de la contraseña
+    $contraseñaCifrada = password_hash($contraseña, PASSWORD_BCRYPT);
+
+    $sql = "INSERT INTO Usuarios (Nombre, Apellido, CorreoElectronico, Contrasena, FechaRegistro, Rol, Activo, UltimoInicioSesion)
+            VALUES ('$nombre', '$apellido', '$correo', '$contraseñaCifrada', '$fechaRegistro', '$rol', $activo, '$ultimoInicioSesion')";
+
     if ($conn->query($sql) === TRUE) {
         // Si la inserción fue exitosa, redirigir al usuario a la página deseada
-        header("Location: /ServiciosWebCUN/index.html");
+        header("Location: ../pages/hud.html");
         exit(); // Asegura que el script se detenga después de la redirección
     } else {
         echo "Error al registrar el usuario: " . $conn->error;
     }
-    
+
     $conn->close();
 }
 

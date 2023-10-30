@@ -1,3 +1,17 @@
+/**
+ * FILEPATH: c:\Users\pual.moreno\Desktop\VSCODES\serviciosWebCUN\Assets\css\index.css
+ * 
+ * This CSS file contains styles for the index page of a website. It includes styles for dividing the section into two columns, 
+ * displaying text and images, and creating hover effects. It also includes styles for a section with a hidden text that appears 
+ * on hover, a section with certificates displayed in a grid, and a section with cards that have a border and a hover effect.
+ */
+/**
+ * FILEPATH: c:\Users\pual.moreno\Desktop\VSCODES\serviciosWebCUN\Assets\css\index.css
+ * 
+ * This CSS file contains styles for the index page of a website. It includes styles for dividing the section into two columns, 
+ * displaying text and images, and creating hover effects. It also includes styles for a section with a hidden text that appears 
+ * on hover, a section with certificates displayed in a grid, and a section with cards that have a border and a hover effect.
+ */
 /*Divide la seccion en dos columnas*/
 .Inicio {
   height: 100vh;
@@ -31,7 +45,7 @@
 }
 
 .Inicio > :nth-child(2n) {
-  background-color: #268b92;
+  background-color: #4b9aa0;
   margin: 40px;
   border-radius: 50px;
 }
@@ -47,14 +61,12 @@
   font-size: 3rem;
   font-weight: 700px;
   margin-bottom: 20px;
-  letter-spacing: 50px;
 }
 
 .Inicio .text-container h2 {
   letter-spacing: 30px;
-  text-decoration-line: underline overline;
   text-decoration-color: #2d6883;
-  margin-bottom: 5%;
+  margin: 10px 10px 10px 10px;
 }
 
 .Inicio .text-container p {
@@ -67,34 +79,29 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: calc(100vh - 111px);
-  padding: 20px;
-}
-
-.Inicio .imagen-container .imagenPaul {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 5% 0 5% 0;
 }
 
 .Inicio .imagen-container img {
-  margin: auto;
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: auto;
   border-radius: 50px;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   -ms-border-radius: 50px;
   -o-border-radius: 50px;
 }
+/*RENSPONSIVE DE .INICIO*/
 
+/*AREA DE CONTENIDO INTRO*/
 .ContenidoIntro {
   height: 50vh;
   background-color: #1b676d;
   color: #9eded8;
+  padding: 40px 50px 0 50px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   position: relative;
   overflow: hidden; /*agregamos un overflow hidden para que la animación no se desborde*/
 }
@@ -111,19 +118,15 @@
 }
 
 .ContenidoIntro .titulo {
+  font-size: 4rem;
+  font-weight: bold;
+  opacity: 1; /*inicialmente lo ponemos visible*/
+  transition: opacity 0.5s ease;
+  /*CENTRA EL TEXTO*/
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 4rem;
-  font-weight: bold;
-  opacity: 1;
-  /*inicialmenteloponemosoculto*/
-  transition: opacity 0.5s ease;
-  -webkit-transition: opacity 0.5s ease;
-  -moz-transition: opacity 0.5s ease;
-  -ms-transition: opacity 0.5s ease;
-  -o-transition: opacity 0.5s ease;
 }
 
 .ContenidoIntro:hover .texto {
@@ -178,7 +181,7 @@
   -o-border-radius: 1rem;
 }
 
-.ContenidoInfo .certificados > div {
+.ContenidoInfo .certificados > a {
   flex: auto;
   border-radius: 1rem;
   background-position: center;
@@ -195,7 +198,7 @@
   -o-transition: all 0.8s cubic-bezier(0.25, 0.4, 0.45, 1.4);
 }
 
-.ContenidoInfo .certificados > div:hover {
+.ContenidoInfo .certificados > a:hover {
   flex: 5;
 }
 

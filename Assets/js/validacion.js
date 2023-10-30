@@ -2,13 +2,13 @@
 var formElements = document.querySelectorAll(".form");
 
 // Itera a través de los elementos con la clase "form"
-formElements.forEach(function(formElement) {
+formElements.forEach(function (formElement) {
   // Obtén todos los elementos "input" y "textarea" dentro del formulario actual
   var inputElements = formElement.querySelectorAll("input, textarea");
 
   // Agrega eventos "keyup", "blur" y "focus" a cada elemento "input" y "textarea"
-  inputElements.forEach(function(inputElement) {
-    inputElement.addEventListener("keyup", function(e) {
+  inputElements.forEach(function (inputElement) {
+    inputElement.addEventListener("keyup", function (e) {
       var label = inputElement.previousElementSibling;
 
       if (e.type === "keyup") {
@@ -20,7 +20,7 @@ formElements.forEach(function(formElement) {
       }
     });
 
-    inputElement.addEventListener("blur", function() {
+    inputElement.addEventListener("blur", function () {
       var label = inputElement.previousElementSibling;
 
       if (inputElement.value === "") {
@@ -30,7 +30,7 @@ formElements.forEach(function(formElement) {
       }
     });
 
-    inputElement.addEventListener("focus", function() {
+    inputElement.addEventListener("focus", function () {
       var label = inputElement.previousElementSibling;
 
       if (inputElement.value === "") {
@@ -45,15 +45,15 @@ formElements.forEach(function(formElement) {
 // Obtén todos los elementos con la clase "tab" y agrega un evento "click" a cada uno
 var tabLinks = document.querySelectorAll(".tab a");
 
-tabLinks.forEach(function(tabLink) {
-  tabLink.addEventListener("click", function(e) {
+tabLinks.forEach(function (tabLink) {
+  tabLink.addEventListener("click", function (e) {
     e.preventDefault();
 
     // Agrega la clase "active" al elemento padre actual y elimina "active" de los hermanos
     var tabItem = tabLink.parentElement;
     tabItem.classList.add("active");
     var siblings = getSiblings(tabItem);
-    siblings.forEach(function(sibling) {
+    siblings.forEach(function (sibling) {
       sibling.classList.remove("active");
     });
 
@@ -62,7 +62,7 @@ tabLinks.forEach(function(tabLink) {
 
     // Oculta los elementos en ".tab-content > div" que no son el destino y muestra el destino
     var tabContentItems = document.querySelectorAll(".tab-content > div");
-    tabContentItems.forEach(function(tabContentItem) {
+    tabContentItems.forEach(function (tabContentItem) {
       if (tabContentItem !== target) {
         tabContentItem.style.display = "none";
       }
