@@ -41,7 +41,13 @@ function registrar($nombre, $apellido, $correo, $contraseña)
 
     if ($conn->query($sql) === TRUE) {
         // Si la inserción fue exitosa, redirigir al usuario a la página deseada
-        header("Location: ../pages/hud.html");
+        session_start();
+        $_SESSION['usuario_id'] = $row['ID'];
+        //$_SESSION['nombre'] = $row['Nombre'];
+        //$_SESSION['apellido'] = $row['Apellido'];
+
+        // Redirige al usuario a la página deseada después del inicio de sesión
+        header("Location: /ServiciosWebCUN/pages/hud.html?idPersona=" . urlencode($_SESSION['usuario_id']));
         exit(); // Asegura que el script se detenga después de la redirección
     } else {
         echo "Error al registrar el usuario: " . $conn->error;
