@@ -37,8 +37,9 @@ function inicioSesion($correo, $contraseña)
             // Contraseña válida, inicia la sesión del usuario
             session_start();
             $_SESSION['usuario_id'] = $row['ID'];
-            $_SESSION['nombre'] = $row['Nombre'];
-            $_SESSION['apellido'] = $row['Apellido'];
+
+            $sql = "UPDATE Usuarios SET UltimoInicioSesion = NOW() WHERE ID = " . $_SESSION['usuario_id'];
+            $conn->query($sql);
 
             // Redirige al usuario a la página deseada después del inicio de sesión
             header("Location: /ServiciosWebCUN/pages/hud.html?idPersona=" . urlencode($_SESSION['usuario_id']));
