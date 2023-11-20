@@ -25,8 +25,6 @@ if ($resultado->num_rows > 0) {
 } else {
     echo "Usuario no encontrado.";
 }
-
-
 // Cerrar la conexión
 $conn->close();
 ?>

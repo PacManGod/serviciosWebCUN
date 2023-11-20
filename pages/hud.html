@@ -5,36 +5,8 @@
 
 <head>
   <title>Bienvenido</title>
-  <link rel="stylesheet" href="../Assets/css/index.css" />
   <link rel="stylesheet" href="../Assets/css/nav.css" />
   <link rel="stylesheet" href="../Assets/css/study.css" />
-  <style>
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      background-color: #333;
-      color: #fff;
-      font-size: 3rem;
-      font-weight: bold;
-      text-align: center;
-      opacity: 0;
-      animation: fade-in 2s ease-in-out forwards;
-    }
-
-    @keyframes fade-in {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-  </style>
-
 </head>
 
 <body>
@@ -42,35 +14,74 @@
     <div class="logo">
       <img src="../Assets/img/LogoCUN.png" alt="logo" href="../index.html" />
     </div>
+    <div class="container_head_title">Bienvenido: </div>
+    <div class="container_head_name"></div>
     <a class="btn">
       <button type="button" class="btnVolver">
         <span>Volver</span>
       </button>
     </a>
   </header>
-  <div class="container">Bienvenido</div>
-
+  <main>
+    <div class="Inicio">
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Correo</th>
+            <th>Rol</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </main>
   <script>
-    const container = document.querySelector(".container");
-    const urlParams = new URLSearchParams(window.location.search);
-    const idPersona = urlParams.get("idPersona");
+    document.addEventListener("DOMContentLoaded", function () {
+      const container_head = document.querySelector(".container_head_name");
+      const tableBody = document.querySelector("table tbody");
 
-    if (idPersona) {
-      // Realizar una solicitud al servidor para obtener información del usuario
-      fetch(`../Backend/conex.php?idPersona=${idPersona}`)
+      const urlParams = new URLSearchParams(window.location.search);
+      const idPersona = urlParams.get("idPersona");
+
+      if (idPersona) {
+        // Realizar una solicitud al servidor para obtener información del usuario
+        fetch(`../Backend/conex.php?idPersona=${idPersona}`)
+          .then(response => response.json())
+          .then(data => {
+            const nombre = data.Nombre;
+            container_head.innerHTML += `<p>${nombre}</p>`;
+          })
+          .catch(error => {
+            console.error('Error en la consulta:', error);
+          });
+      }
+
+      // Realizar una solicitud al servidor para obtener y llenar los datos de la tabla
+      fetch("../Backend/Consulta_Tabla.php")
         .then(response => response.json())
         .then(data => {
-          console.log(data); // Agregar un mensaje de depuración
-          // Acceder a la propiedad "Nombre" del objeto JSON
-          const nombre = data.Nombre;
-          // Agregar el nombre al contenido del elemento con la clase "container"
-          container.innerHTML += `<p>Nombre: ${nombre}</p>`;
+          // Limpiar el cuerpo de la tabla
+          tableBody.innerHTML = "";
+
+
+          // Iterar sobre los datos y agregar filas a la tabla
+          data.forEach(row => {
+            console.log('Correo:', row.Correo); // Agrega esta línea para depurar
+            tableBody.innerHTML += `
+            <tr>
+              <td>${row.Nombre || ''}</td>
+              <td>${row.Apellido || ''}</td>
+              <td>${row.CorreoElectronico.trim() || ''}</td>
+              <td>${row.Rol || ''}</td>
+            </tr>`;
+          });
         })
         .catch(error => {
-          console.error('Error en la consulta:', error);
+          console.error('Error en la consulta de la tabla:', error);
         });
-    }
-
+    });
   </script>
 
   <script>

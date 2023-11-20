@@ -20,40 +20,54 @@ if (empty($_POST)) {
 $nombre = $_POST['RNombre'];
 $apellido = $_POST['RApellido'];
 $correo = $_POST['RCorreo'];
-$contraseña = $_POST['RPass'];
+$contrasena = $_POST['RPass'];
 
-registrar($nombre, $apellido, $correo, $contraseña);
+registrar($nombre, $apellido, $correo, $contrasena, $conn);
 
-// Función para registrar un usuario
-function registrar($nombre, $apellido, $correo, $contraseña)
+function registrar($nombre, $apellido, $correo, $contrasena, $conn)
 {
-    global $conn;
-    $fechaRegistro = date('Y-m-d H:i:s'); // Obtén la fecha y hora actual
-    $rol = 'Usuario'; // Asigna un rol por defecto
-    $activo = 1; // Indica que el usuario está activo
-    $ultimoInicioSesion = $fechaRegistro; // Establece el último inicio de sesión como la fecha de registro
+    $fechaRegistro = date('Y-m-d H:i:s');
+    $rol = 'Usuario';
+    $activo = 1;
 
-    // Hasheo de la contraseña
-    $contraseñaCifrada = password_hash($contraseña, PASSWORD_BCRYPT);
+    // Hash the password using the default algorithm
+    $contrasenaCifrada = password_hash($contrasena, PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO Usuarios (Nombre, Apellido, CorreoElectronico, Contrasena, FechaRegistro, Rol, Activo, UltimoInicioSesion)
-            VALUES ('$nombre', '$apellido', '$correo', '$contraseñaCifrada', '$fechaRegistro', '$rol', $activo, '$ultimoInicioSesion')";
+    // Use prepared statements to prevent SQL injection attacks
+    $stmt = $conn->prepare("INSERT INTO Usuarios (Nombre, Apellido, CorreoElectronico, Contrasena, FechaRegistro, Rol, Activo, UltimoInicioSesion) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssssi", $nombre, $apellido, $correo, $contrasenaCifrada, $fechaRegistro, $rol, $activo);
 
-    if ($conn->query($sql) === TRUE) {
-        // Si la inserción fue exitosa, redirigir al usuario a la página deseada
+    if ($stmt->execute()) {
+        $idUsuario = ConsultarIdUsuario($correo, $conn);
+
         session_start();
-        $_SESSION['usuario_id'] = $row['ID'];
-        //$_SESSION['nombre'] = $row['Nombre'];
-        //$_SESSION['apellido'] = $row['Apellido'];
+        $_SESSION['usuario_id'] = $idUsuario;
 
-        // Redirige al usuario a la página deseada después del inicio de sesión
         header("Location: /ServiciosWebCUN/pages/hud.html?idPersona=" . urlencode($_SESSION['usuario_id']));
-        exit(); // Asegura que el script se detenga después de la redirección
+        exit();
     } else {
-        echo "Error al registrar el usuario: " . $conn->error;
+        echo "Error al registrar el usuario: " . $stmt->error;
     }
 
-    $conn->close();
+    $stmt->close();
 }
 
+function ConsultarIdUsuario($correo, $conn)
+{
+    $selectQuery = "SELECT IdUsuario FROM Usuarios WHERE CorreoElectronico = ?";
+    $selectStmt = $conn->prepare($selectQuery);
+    $selectStmt->bind_param("s", $correo);
+
+    if ($selectStmt->execute()) {
+        $selectResult = $selectStmt->get_result();
+        $usuario = $selectResult->fetch_assoc();
+        $usuario_id = $usuario['IdUsuario'];
+    }
+
+    $selectStmt->close();
+
+    return $usuario_id;
+}
+
+$conn->close();
 ?>
