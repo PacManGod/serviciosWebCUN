@@ -34,8 +34,9 @@ function registrar($nombre, $apellido, $correo, $contrasena, $conn)
     $contrasenaCifrada = password_hash($contrasena, PASSWORD_DEFAULT);
 
     // Use prepared statements to prevent SQL injection attacks
-    $stmt = $conn->prepare("INSERT INTO Usuarios (Nombre, Apellido, CorreoElectronico, Contrasena, FechaRegistro, Rol, Activo, UltimoInicioSesion) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssssi", $nombre, $apellido, $correo, $contrasenaCifrada, $fechaRegistro, $rol, $activo);
+    $stmt = $conn->prepare("INSERT INTO Usuarios VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssssis", $nombre, $apellido, $correo, $contrasenaCifrada, $fechaRegistro, $rol, $activo, $fechaRegistro);
+    //$stmt->bind_param("ssssssi", $nombre, $apellido, $correo, $contrasenaCifrada, $fechaRegistro, $rol, $activo, $fechaRegistro);
 
     if ($stmt->execute()) {
         $idUsuario = ConsultarIdUsuario($correo, $conn);
@@ -54,14 +55,14 @@ function registrar($nombre, $apellido, $correo, $contrasena, $conn)
 
 function ConsultarIdUsuario($correo, $conn)
 {
-    $selectQuery = "SELECT IdUsuario FROM Usuarios WHERE CorreoElectronico = ?";
+    $selectQuery = "SELECT ID FROM Usuarios WHERE CorreoElectronico = ?";
     $selectStmt = $conn->prepare($selectQuery);
     $selectStmt->bind_param("s", $correo);
 
     if ($selectStmt->execute()) {
         $selectResult = $selectStmt->get_result();
         $usuario = $selectResult->fetch_assoc();
-        $usuario_id = $usuario['IdUsuario'];
+        $usuario_id = $usuario['ID'];
     }
 
     $selectStmt->close();

@@ -45,7 +45,7 @@ function inicioSesion($correo, $contraseña)
             header("Location: /ServiciosWebCUN/pages/hud.html?idPersona=" . urlencode($_SESSION['usuario_id']));
             exit();
         } else {
-            echo "Contraseña incorrecta";
+            header("Location: /ServiciosWebCUN/pages/iniciar.html");
         }
     } else {
         echo "Usuario no encontrado";
